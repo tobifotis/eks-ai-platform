@@ -1,0 +1,29 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: ai-platform-cluster
+  region: us-east-1
+  version: "1.31"
+
+managedNodeGroups:
+  - name: general
+    instanceType: t3.medium
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 3
+    volumeSize: 30
+    volumeType: gp3
+    ssh:
+      allow: false
+    iam:
+      withAddonPolicies:
+        ebs: true
+
+iam:
+  withOIDC: true
+
+addons:
+  - name: aws-ebs-csi-driver
+    wellKnownPolicies:
+      ebsCSIController: true
