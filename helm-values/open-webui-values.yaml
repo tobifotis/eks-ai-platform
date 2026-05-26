@@ -1,0 +1,48 @@
+replicaCount: 1
+
+ollama:
+  enabled: false
+
+pipelines:
+  enabled: false
+tika:
+  enabled: false
+
+extraEnvVars:
+  - name: OLLAMA_BASE_URL
+    value: ""
+  - name: OPENAI_API_BASE_URLS
+    value: "https://api.anthropic.com/v1"
+  - name: OPENAI_API_KEYS
+    valueFrom:
+      secretKeyRef:
+        name: anthropic-api-key
+        key: api-key
+  - name: WEBUI_NAME
+    value: "AI Platform"
+  - name: ENABLE_SIGNUP
+    value: "true"
+  - name: DEFAULT_USER_ROLE
+    value: "user"
+
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClass: gp3
+  accessModes:
+    - ReadWriteOnce
+
+resources:
+  requests:
+    cpu: "250m"
+    memory: "512Mi"
+  limits:
+    cpu: "1"
+    memory: "1Gi"
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
