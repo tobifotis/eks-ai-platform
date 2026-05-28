@@ -1,4 +1,4 @@
-# eks-ai-platform
+## AI Chat Platform on AWS EKS
 
 Self-hosted AI chat platform deployed on AWS EKS with Open WebUI, Anthropic Claude API, and Headlamp dashboard.
 
@@ -16,13 +16,13 @@ Open WebUI and Headlamp don't communicate with each other. They are two independ
 
 ## Screenshots
 
-### Open WebUI -- AI Chat Interface
+### Open WebUI - AI Chat Interface
 ![Open WebUI](docs/open-webui-chat.png)
 
-### Headlamp -- Cluster Overview
+### Headlamp - Cluster Overview
 ![Headlamp Overview](docs/headlamp-overview.png)
 
-### Headlamp -- Open WebUI Namespace
+### Headlamp - Open WebUI Namespace
 ![Headlamp Namespace](docs/headlamp-open-webui-namespace.png)
 
 ## Tech Stack
