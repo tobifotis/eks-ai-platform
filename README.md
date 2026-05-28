@@ -14,6 +14,17 @@ Three external connections sit outside the cluster. Open WebUI sends prompts to 
 
 Open WebUI and Headlamp don't communicate with each other. They are two independent workloads in the same cluster. Headlamp observes Open WebUI's resources through the Kubernetes API, but there is no direct connection between them.
 
+## Screenshots
+
+### Open WebUI -- AI Chat Interface
+![Open WebUI](docs/open-webui-chat.png)
+
+### Headlamp -- Cluster Overview
+![Headlamp Overview](docs/headlamp-overview.png)
+
+### Headlamp -- Open WebUI Namespace
+![Headlamp Namespace](docs/headlamp-open-webui-namespace.png)
+
 ## Tech Stack
 
 - AWS EKS (Kubernetes 1.31)
