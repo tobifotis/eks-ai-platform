@@ -39,15 +39,18 @@ git clone https://github.com/tobifotis/eks-ai-platform.git
 cd eks-ai-platform
 
 # Deploy everything (takes ~15-20 minutes for cluster creation)
-ANTHROPIC_API_KEY=sk-ant-your-key-here ./scripts/setup.sh
+chmod +x scripts/setup.sh
+./scripts/setup.sh
 
 # Access Open WebUI
 kubectl port-forward svc/open-webui -n open-webui 3000:80
 # Open http://localhost:3000
+# Enter your Anthropic API key in Admin Settings > Connections > gear icon
 
 # Access Headlamp
 kubectl port-forward svc/headlamp -n kube-system 8080:80
 # Open http://localhost:8080
+# Paste the token printed by the setup script
 ```
 
 ## Project Structure
@@ -69,10 +72,34 @@ eks-ai-platform/
     └── eks-ai-platform-architecture.png
 ```
 
+## What This Demonstrates
+
+- AWS EKS cluster provisioning with eksctl
+- Helm-based application deployments with custom values
+- Kubernetes namespaces for workload isolation
+- RBAC configuration (ServiceAccount, ClusterRoleBinding)
+- Persistent storage with EBS CSI Driver and gp3 StorageClass
+- Kubernetes Secrets for sensitive data management
+- Cluster observability with Headlamp dashboard
+- Infrastructure automation with setup/teardown scripts
+
 ## Cleanup
 
 ```bash
+chmod +x scripts/cleanup.sh
 ./scripts/cleanup.sh
 ```
 
 This deletes the Helm releases, namespaces, and the entire EKS cluster to stop AWS charges.
+
+## Cost Estimate
+
+| Resource | Approximate Cost |
+|---|---|
+| EKS control plane | $0.10/hr |
+| 2x t3.medium nodes | $0.08/hr |
+| EBS storage (11Gi) | ~$1/month |
+| Anthropic API calls | Pay-per-use |
+| **Total (if left on)** | **~$134/month** |
+
+Recommended approach: create the cluster when working, tear it down when done. A few hours of usage costs a couple dollars.
