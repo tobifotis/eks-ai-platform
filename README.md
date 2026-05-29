@@ -1,6 +1,6 @@
 ## AI Chat Platform on AWS EKS
 
-Self-hosted AI chat platform deployed on AWS EKS with Open WebUI, Anthropic Claude API, and Headlamp dashboard.
+Self-hosted AI chat platform deployed on AWS EKS with Open WebUI, Anthropic Claude API, and Headlamp dashboard, provisioned with Terraform.
 
 ## Architecture
 
