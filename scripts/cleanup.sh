@@ -23,16 +23,15 @@ helm uninstall open-webui --namespace open-webui 2>/dev/null || true
 helm uninstall headlamp --namespace kube-system 2>/dev/null || true
 
 echo ""
-echo "[2/4] Deleting namespace..."
+echo "[2/4] Deleting namespace and RBAC resources..."
 kubectl delete namespace open-webui 2>/dev/null || true
-
-echo ""
-echo "[3/4] Cleaning up RBAC resources..."
 kubectl delete -f k8s/headlamp-rbac.yaml 2>/dev/null || true
 
 echo ""
-echo "[4/4] Deleting EKS cluster (this takes ~10 minutes)..."
-eksctl delete cluster --name ai-platform-cluster --region us-east-1
+echo "[3/4] Destroying infrastructure with Terraform (this takes ~10 minutes)..."
+cd terraform
+terraform destroy -auto-approve
+cd ..
 
 echo ""
 echo "============================================"

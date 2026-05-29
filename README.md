@@ -28,6 +28,7 @@ Open WebUI and Headlamp don't communicate with each other. They are two independ
 ## Tech Stack
 
 - AWS EKS (Kubernetes 1.31)
+- Terraform (infrastructure provisioning)
 - Open WebUI (self-hosted AI chat interface)
 - Anthropic Claude API
 - Headlamp (Kubernetes dashboard)
@@ -37,7 +38,7 @@ Open WebUI and Headlamp don't communicate with each other. They are two independ
 ## Prerequisites
 
 - AWS CLI configured with appropriate permissions
-- eksctl
+- Terraform (>= 1.0)
 - kubectl
 - Helm 3
 - An Anthropic API key
@@ -69,7 +70,10 @@ kubectl port-forward svc/headlamp -n kube-system 8080:80
 ```
 eks-ai-platform/
 ├── README.md
-├── cluster.yaml                       # EKS cluster configuration
+├── terraform/                         # EKS cluster infrastructure
+│   ├── main.tf                        # VPC, EKS, IAM modules
+│   ├── variables.tf                   # Input variables
+│   └── outputs.tf                     # Cluster outputs
 ├── helm-values/
 │   ├── open-webui-values.yaml         # Helm overrides for Open WebUI
 │   └── headlamp-values.yaml           # Helm overrides for Headlamp
@@ -80,12 +84,15 @@ eks-ai-platform/
 │   ├── setup.sh                       # One-command deploy
 │   └── cleanup.sh                     # One-command teardown
 └── docs/
-    └── eks-ai-platform-architecture.png
+    ├── eks-ai-platform-architecture.png
+    ├── headlamp-open-webui-namespace.png
+    ├── headlamp-overview.png
+    └── open-webui-chat.png
 ```
 
 ## What This Demonstrates
 
-- AWS EKS cluster provisioning with eksctl
+- Infrastructure provisioning with Terraform (VPC, EKS, IAM, OIDC)
 - Helm-based application deployments with custom values
 - Kubernetes namespaces for workload isolation
 - RBAC configuration (ServiceAccount, ClusterRoleBinding)
